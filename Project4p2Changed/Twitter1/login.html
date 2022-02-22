@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- <script language="javascript" type="text/javascript" src="js/login.js"> </script> -->
+    <!-- <script src="login.js"></script> -->
+
+    <meta charset="utf-8" />
+    <title>twitter login</title>
+
+    <style>
+        .login-container{
+            /* background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png"); */
+            background-color:#007bff0f;
+            height: 720px;
+        }
+      
+    </style>
+
+</head>
+
+
+
+<body>
+    <div id="loginContainer" class="login-container">
+        <div class="p-2 m-auto">
+            <div class=" box1 p-2 m-auto  w-50">
+                <h1> Login to Twitter</h1>
+                <div id="box" class="form1 p-2 border border-dark rounded-sm" >
+                    <form>
+                        <div class="form-row">
+                            <label for="un">Username</label>
+                            <input type="text" class="form-control" id="un" placeholder="JohnDoe" autocomplete="off">
+                        </div>
+                        <div class="form-row">
+                            <label for="pwd4">Password</label>
+                            <input type="password" class="form-control" id="pwd4" placeholder="Password"
+                                autocomplete="off">
+                        </div>
+
+                        <button onclick="onClick()" type="button" class=" mt-2 btn btn-primary btn-block ">Sign
+                            In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script language="javascript" type="text/javascript">
+
+        var wsUri = "ws://localhost:8080/websocket";
+        var output;
+        websocket = new WebSocket(wsUri);
+
+
+        function init() {
+            output = document.getElementById("output");
+            testWebSocket();
+        }
+
+        function testWebSocket() {
+            websocket.onopen = function (evt) { onOpen(evt) };
+            websocket.onclose = function (evt) { onClose(evt) };
+            websocket.onmessage = function (evt) { onMessage(evt) };
+            websocket.onerror = function (evt) { onError(evt) };
+        }
+
+        function onOpen(evt) {
+        }
+
+        function onClose(evt) {
+        }
+
+        function onMessage(evt) {
+            console.log(evt.data)
+            if (evt.data == "Login Succesful") {
+                alert("Login Succesful")
+                localStorage.setItem("user", document.getElementById("un").value)
+                window.location.replace("http://127.0.0.1:8080/home")
+            }
+            else if (evt.data == "Wrong Credentials")
+                alert("Wrong Credentials")
+            //websocket.close();
+        }
+
+        function onError(evt) {
+            showonScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function doSend(message) {
+        }
+
+        function showonScreen(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        function onClick() {
+            var un = document.getElementById("un").value
+            var pwd = document.getElementById("pwd4").value
+            var message = "type:LOGIN&un:" + un + "&pwd:" + pwd
+            websocket.send(message)
+        }
+        window.addEventListener("load", init, false);
+
+    </script>
+
+
+
+</body>
+
+</html>

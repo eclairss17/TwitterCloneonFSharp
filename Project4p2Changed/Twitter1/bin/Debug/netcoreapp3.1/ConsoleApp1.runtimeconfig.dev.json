@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\eclai\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\eclai\\.nuget\\packages"
+    ]
+  }
+}

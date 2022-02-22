@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <!-- <script src="js/signUp.js"></script> -->
+
+    <title>twitter signup</title>
+    <style>
+        .signup-container{
+            /* background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png"); */
+            background-color:#007bff0f;
+            height: 720px;
+        }
+      
+    </style>
+</head>
+
+
+
+<body>
+    <div id="signupContainer" class="signup-container">
+        <div class="p-2 m-auto">
+            <div class="box1 p-2 m-auto  w-50">
+                <h1> Welcome to Twitter Sign Up Page</h1>
+                <div class="form1 p-2 border border-dark rounded-sm">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="fname4">First Name</label>
+                                <input type="text" class="form-control" id="fname4" placeholder="Alin" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lname4">Last Name</label>
+                                <input type="text" class="form-control" id="lname4" placeholder="Dobra" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="email4">Enter Email</label>
+                                <input type="email" class="form-control" id="email4" placeholder="adobra@ufl.edu" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="pwd4">Enter Password</label>
+                                <input type="password" class="form-control" id="pwd4" placeholder="Password" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <button onclick="onClick()" type="button" class=" btn btn-primary btn-block ">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+
+        var wsUri = "ws://localhost:8080/websocket";
+        var output;
+        websocket = new WebSocket(wsUri);
+
+
+        function init() {
+            output = document.getElementById("output");
+            testWebSocket();
+        }
+
+        function testWebSocket() {
+            websocket.onopen = function (evt) { onOpen(evt) };
+            websocket.onclose = function (evt) { onClose(evt) };
+            websocket.onmessage = function (evt) { onMessage(evt) };
+            websocket.onerror = function (evt) { onError(evt) };
+        }
+
+        function onOpen(evt) {
+        }
+
+        function onClose(evt) {
+        }
+
+        function onMessage(evt) {
+            displayonScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
+            console.log(evt.data)
+            if (evt.data == "Wrong") {
+                alert("redirect")
+                window.location.replace("http://127.0.0.1:8080/home")
+                window.onload = function () {
+                    localStorage.setItem("socket", websocket)
+                }
+            }
+            //websocket.close();
+        }
+
+        function onError(evt) {
+            displayonScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function doSend(message) {
+        }
+
+        function displayonScreen(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        function onClick() {
+            var fname = document.getElementById("fname4").value
+            var lname = document.getElementById("lname4").value
+            var email = document.getElementById("email4").value
+            var pwd = document.getElementById("pwd4").value
+            var message = "type:SIGNUP&fname:" + fname + "&lname:" + lname + "&email:" + email + "&pwd:" + pwd
+            websocket.send(message)
+            alert("User Succesfully Signed Up")
+            window.location.replace("http://127.0.0.1:8080/login")
+        }
+        window.addEventListener("load", init, false);
+
+    </script>
+
+
+
+</body>
+</html>

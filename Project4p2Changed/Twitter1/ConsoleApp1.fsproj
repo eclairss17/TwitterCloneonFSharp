@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="test.html" />
+    <Content Include="search.html" />
+    <Content Include="login.html" />
+    <Content Include="signup.html" />
+    <Content Include="user.html" />
+    <Content Include="following.html" />
+    <Content Include="followers.html" />
+    <Content Include="home.html" />
+    <Content Include="index.html" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup />
+
+  <ItemGroup>
+    <PackageReference Include="Akka.FSharp" Version="1.4.12" />
+    <PackageReference Include="Suave" Version="2.5.6" />
+  </ItemGroup>
+
+</Project>

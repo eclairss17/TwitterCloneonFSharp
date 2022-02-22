@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>twitter home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="js/home.js"></script> -->
+
+    <style>
+        .contain {
+            margin-right: 7%;
+            margin-left: 7%;
+
+        }
+        .home-Container{
+            background-color:#007bff0f;
+            height: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <script language="javascript" type="text/javascript">
+        var username = localStorage.getItem("user")
+        var first = true
+        var wsUri = "ws://localhost:8080/websocket";
+        var output;
+        websocket = new WebSocket(wsUri);
+
+        function init() {
+            output = document.getElementById("output");
+            output1 = document.getElementById("output1");
+            output2 = document.getElementById("output2");
+            output3 = document.getElementById("output3");
+            testWebSocket();
+        }
+
+        function testWebSocket() {
+            websocket.onopen = function (evt) { onOpen(evt) };
+            websocket.onclose = function (evt) { onClose(evt) };
+            websocket.onmessage = function (evt) { onMessage(evt) };
+            websocket.onerror = function (evt) { onError(evt) };
+        }
+
+        function onOpen(evt) {
+            
+        }
+
+        function onClose(evt) {
+        }
+
+        function onMessage(evt) {
+            console.log(evt.data)
+            if (evt.data.includes("hi4xyz")) {
+                var output = evt.data.split('&')
+                var tid = output[1].split(':')[1]
+                var tweet = output[2].split(':')[1]
+                var cid = output[3].split(':')[1]
+                var isr = output[4].split(':')[1]
+                var rtid = output[5].split(':')[1]
+                var sid = output[6].split(':')[1]
+
+                function onClick2() {
+                    var msg = "type:RTWT&un:" + username + "&tid:" + tid
+                    websocket.send(msg)
+                }
+                var temp = document.createElement("div");
+                temp.className = "card"
+                temp.style = "width: 18rem;"
+                var temp2 = document.createElement("div");
+                temp2.className = "card-body"
+                var he1 = document.createElement("h5");
+                he1.className = "card-title"
+                he1.innerHTML =  cid
+                temp2.appendChild(he1)
+
+                if (isr.includes("T")) {
+                    var he2 = document.createElement("h6");
+                    he2.className = "card-subtitle mb-2 text-muted"
+                    he2.innerHTML = "Retweeted By " + sid
+                    temp2.appendChild(he2)
+                }
+                var he3 = document.createElement("p");
+                he3.className = "card-text"
+                he3.style.wordWrap = "break-word";
+                he3.innerHTML = tweet;
+                temp2.appendChild(he3)
+                var he4 = document.createElement("button");
+                he4.className = "btn btn-basic"
+                he4.innerHTML = "Retweet"
+                he4.onclick = onClick2
+                temp2.appendChild(he4);
+                temp.appendChild(temp2);
+                output.prepend(temp)
+
+            }
+
+            if (evt.data.includes("htxyz")) {
+                var output = evt.data.split('&')
+                var tid = output[1].split(':')[1]
+                var tweet = output[2].split(':')[1]
+                var cid = output[3].split(':')[1]
+                var isr = output[4].split(':')[1]
+                var rtid = output[5].split(':')[1]
+                var sid = output[6].split(':')[1]
+
+                function onClick2() {
+                    var msg = "type:RTWT&un:" + username + "&tid:" + tid
+                    websocket.send(msg)
+                }
+                var temp = document.createElement("div");
+                temp.className = "card"
+                temp.style = "width: 18rem;"
+                var temp2 = document.createElement("div");
+                temp2.className = "card-body"
+                var he1 = document.createElement("h5");
+                he1.className = "card-title"
+                he1.innerHTML = cid
+                temp2.appendChild(he1)
+
+                if (isr.includes("T")) {
+                    var he2 = document.createElement("h6");
+                    he2.className = "card-subtitle mb-2 text-muted"
+                    he2.innerHTML = "Retweeted By " + sid
+                    temp2.appendChild(he2)
+                }
+                var he3 = document.createElement("p");
+                he3.className = "card-text"
+                he3.style.wordWrap = "break-word";
+                he3.innerHTML = tweet;
+                temp2.appendChild(he3)
+                var he4 = document.createElement("button");
+                he4.className = "btn btn-basic"
+                he4.innerHTML = "Retweet"
+                he4.onclick = onClick2
+                temp2.appendChild(he4);
+                temp.appendChild(temp2);
+                output.prepend(temp)
+
+            }
+
+            if (evt.data.includes("sxyz")) {
+                var output = evt.data.split('&')
+                var tid = output[1].split(':')[1]
+                var tweet = output[2].split(':')[1]
+                var cid = output[3].split(':')[1]
+                var isr = output[4].split(':')[1]
+                var rtid = output[5].split(':')[1]
+                var sid = output[6].split(':')[1]
+
+                function onClick2() {
+                    var msg = "type:RTWT&un:" + username + "&tid:" + tid
+                    websocket.send(msg)
+                }
+                var temp = document.createElement("div");
+                temp.className = "card"
+                temp.style = "width: 18rem;"
+                var temp2 = document.createElement("div");
+                temp2.className = "card-body"
+                var he1 = document.createElement("h5");
+                he1.className = "card-title"
+                he1.innerHTML = cid
+                temp2.appendChild(he1)
+
+                if (isr.includes("T")) {
+                    var he2 = document.createElement("h6");
+                    he2.className = "card-subtitle mb-2 text-muted"
+                    he2.innerHTML = "Retweeted By " + sid
+                    temp2.appendChild(he2)
+                }
+                var he3 = document.createElement("p");
+                he3.className = "card-text"
+                he3.style.wordWrap = "break-word";
+                he3.innerHTML = tweet;
+                temp2.appendChild(he3)
+                var he4 = document.createElement("button");
+                he4.className = "btn btn-basic"
+                he4.innerHTML = "Retweet"
+                he4.onclick = onClick2
+                temp2.appendChild(he4);
+                temp.appendChild(temp2);
+                output1.prepend(temp)
+
+            }
+
+            if (evt.data.includes("dfl")) {
+                var output = evt.data.split('&')
+                var uid = output[1].split(':')[1]
+                var temp = document.createElement("div");
+                temp.className = "card border rounded-lg"
+                var temp2 = document.createElement("div");
+                temp2.className = "card-body"
+                temp2.innerHTML = "User" + uid
+                temp.appendChild(temp2)
+                output2.prepend(temp)
+            }
+
+            if (evt.data.includes("dofl")) {
+                var output = evt.data.split('&')
+                var uid = output[1].split(':')[1]
+                var temp = document.createElement("div");
+                temp.className = "card border rounded-lg"
+                var temp2 = document.createElement("div");
+                temp2.className = "card-body"
+                temp2.innerHTML = "User" + uid
+                temp.appendChild(temp2)
+                output3.prepend(temp)
+            }
+        }
+
+            function onError(evt) {
+                showonScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+            }
+
+            function doSend(message) {
+            }
+
+            
+            function showonScreen(message) {
+                var pre = document.createElement("p");
+                pre.style.wordWrap = "break-word";
+                pre.innerHTML = message;
+                output.appendChild(pre);
+            }
+
+        function firstcall() {
+            
+            if (first) {
+                websocket.send("HOME&user:" + username)
+            }
+            first = false
+        }
+
+        function tweet() {
+            var tweet = document.getElementById("textareafortweetmessage").value
+            var msg = "type:TWEET&un:" + username + "&text:" + tweet
+            websocket.send(msg)
+            document.getElementById("textareafortweetmessage").value = ""
+        }
+
+        function search() {
+            var search = document.getElementById("inspecttext").value
+            var msg = "type:SEARCH&un:" + username + "&text:" + search
+            output1.innerHTML = ""
+            websocket.send(msg)
+            document.getElementById("inspecttext").value = ""
+        }
+
+        function follow() {
+            var follow = document.getElementById("tofollowtheuser").value
+            var msg = "type:FOLLOWXYZ&un:" + username + "&text:" + follow
+            
+            websocket.send(msg)
+        }
+        function signOut() {
+            var msg = "type:LOGOUT&un:" + username
+            websocket.send(msg)
+            alert("User Succesfully Logged Out!")
+            window.location.replace("http://127.0.0.1:8080/login")
+        }
+
+            window.addEventListener("load", init, false);
+
+
+
+    </script>
+    <div id="homeContainer" class="home-Container">
+        <div class="contain">
+
+            <h2 class="text-center">Twitter Engine</h2>
+            <button onClick="signOut()" type="button" class=" p-2 mb-2 btn btn-primary pull-right" id="submittweet">Signout</button>
+
+
+            <ul class="nav nav-tabs">
+                <li class="active"><button onClick="firstcall()" type="button" class="btn btn-link" data-toggle="tab" href="#home">Home</button></li>
+                <li><button type="button" class="btn btn-link" data-toggle="tab" href="#search">Search</button></li>
+                <li><button type="button" class="btn btn-link" data-toggle="tab" href="#fl">Followers</button></li>
+                <li><button type="button" class="btn btn-link" data-toggle="tab" href="#fol">Following</button></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>HOME Page</h3>
+                    <div class="form-group">
+                        <label for="tweet">Write your tweet:</label>
+                        <textarea class="form-control" rows="5" id="textareafortweetmessage"></textarea>
+                        <br>
+                        <button onClick="tweet()" type="button" class=" p-2 btn btn-primary " id="submittweet">Submit Tweet</button>
+                    </div>
+                    <div id="output">
+
+                    </div>
+                </div>
+
+
+                <div id="search" class="tab-pane fade">
+                    <h3>Search</h3>
+                    <div class="form-group">
+                        <label for="inspecttext">Search For Tweets:</label>
+                        <input type="text" class="form-control" id="inspecttext"></input>
+                        <br>
+                        <button onClick="search()" type="button" class=" p-2 btn btn-primary " id="submitsearch">Search</button>
+                    </div>
+                    <div id="output1">
+
+                    </div>
+                </div>
+                <div id="fl" class="tab-pane fade mb-2">
+                    <h3>User Followers List</h3>
+                    <input class="form-control lg" type="text" placeholder="My Followers." readonly>
+                    <div id="output2">
+
+                    </div>
+                </div>
+                <div id="fol" class="tab-pane fade">
+                    <br>
+                    <label for="tofollowtheuser">Search Username:</label>
+                    <input type="text" class="form-control" id="tofollowtheuser"></input>
+                    <br>
+                    <button onClick="follow()" type="button" class=" p-2 btn btn-primary " id="submitfollowreq">Follow</button>
+                    <h3>User Following List</h3>
+                    <input class="form-control lg" type="text" placeholder="My Followings." readonly>
+                    <div id="output3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
